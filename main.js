@@ -1,3 +1,6 @@
+
+
+
 window.onload = function() {
     setTimeout(() => {
         keyboardJS.pressKey('a')
