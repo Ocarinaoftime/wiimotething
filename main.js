@@ -31,9 +31,14 @@ function initButtons() {
   wiimote.BtnListener = (buttons) => {
     var buttonJSON = JSON.stringify(buttons, null, 2);
 
-    if(document.getElementById('buttons').innerHTML != buttonJSON){
+    if (document.getElementById('buttons').innerHTML != buttonJSON) {
       document.getElementById('buttons').innerHTML = buttonJSON
     }
+
+    if (buttons.A) {
+      keyboardJS.pressKey('a')
+    }
+
   }
 }
 
