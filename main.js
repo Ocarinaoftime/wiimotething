@@ -1,36 +1,39 @@
 import WIIMote from "./src/wiimote.js"
 
+var wiimote = undefined;
 
+var connectButton = document.getElementById("connect");
 
-requestButton.addEventListener("click", async () => {
-    let device;
-    try {
-      const devices = await navigator.hid.requestDevice({
-          filters: [{ vendorId: 0x057e }],
-      });
+connectButton.addEventListener("click", async () => {
+  let device;
+  try {
+    const devices = await navigator.hid.requestDevice({
+        filters: [{ vendorId: 0x057e }],
+    });
       
-      device = devices[0];
-      wiimote = new WIIMote(device)
+    device = devices[0];
+    wiimote = new WIIMote(device);
   
-    } catch (error) {
-      console.log("An error occurred.", error);
-    }
+  } catch (error) {
+    console.log("An error occurred.", error);
+  }
   
-    if (!device) {
-      console.log("No device was selected.");
-    } else {
-      console.log(`HID: ${device.productName}`);
-  
-      enableControls()
-      initCanvas()
-  
-    }
-  });
+  if (!device) {
+    console.log("No device was selected.");
+  } else {
+    console.log(`HID: ${device.productName}`);
+    initButtons()
+  }
+});
 
 
-window.onload = function() {
-    setTimeout(() => {
-        keyboardJS.pressKey('a')
-    }, 4000)
+function initButtons() {
+  wiimote.BtnListener = (buttons) => {
+    var buttonJSON = JSON.stringify(buttons, null, 2);
+
+    if(document.getElementById('buttons').innerHTML != buttonJSON){
+      document.getElementById('buttons').innerHTML = buttonJSON
+    }
+  }
 }
 
