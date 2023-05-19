@@ -35,9 +35,9 @@ function initButtons() {
       document.getElementById('buttons').innerHTML = buttonJSON
     }
 
-    /*if (buttons.A) {
+    if (buttons.A) {
       keyboardJS.pressKey('a')
-    }*/
+    }
 
   }
 }
