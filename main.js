@@ -35,10 +35,6 @@ function initButtons() {
       document.getElementById('buttons').innerHTML = buttonJSON
     }
 
-    if (buttons.A) {
-      keyboardJS.pressKey('a')
-    }
-
   }
 }
 
