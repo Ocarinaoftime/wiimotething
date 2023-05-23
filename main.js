@@ -42,3 +42,5 @@ function initButtons() {
   }
 }
 
+setInterval(() => {wiimote.getClassicButtons()}, 5000)
+

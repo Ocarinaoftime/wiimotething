@@ -12,11 +12,11 @@ import {
     LEDS,
     BUTTON_BYTE1,
     BUTTON_BYTE2,
+    BUTTON_EXTBYTE,
     RegisterType,
     IRDataType,
     IRSensitivity,
     InputReport,
-    BUTTON_EXTBYTE
 } from "./const.js"
 
 export default class WIIMote{
@@ -222,4 +222,8 @@ export default class WIIMote{
         this.IRDecoder([ir1, ir2, ir3, ir4, ir5, ir6, ir7, ir8, ir9, ir10, ir11, ir12])
 
     }
+
+    //Return Classic Controller buttons
+    getClassicButtons() {
+        return BUTTON_EXTBYTE    }
 }
