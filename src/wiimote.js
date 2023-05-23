@@ -15,7 +15,8 @@ import {
     RegisterType,
     IRDataType,
     IRSensitivity,
-    InputReport
+    InputReport,
+    BUTTON_EXTBYTE
 } from "./const.js"
 
 export default class WIIMote{
@@ -56,6 +57,7 @@ export default class WIIMote{
         this.device.open().then(() => {
             this.sendReport(ReportMode.STATUS_INFO_REQ, [0x00])
             this.setDataTracking(DataReportMode.CORE_BUTTONS)
+            this.setDataTracking(DataReportMode.EXT_BUTTONS)
 
             this.device.oninputreport = (e) => this.listener(e);
         })
@@ -186,13 +188,15 @@ export default class WIIMote{
     }
 
     // Decode the button data
-    BTNDecoder(byte1, byte2){
+    BTNDecoder(byte1, byte2, extByte){
         for (let i = 0; i < 8; i++) {
             let byte1Status = getBitInByte(byte1, i+1)
             let byte2Status = getBitInByte(byte2, i+1)
+            let extByteStatus = getBitInByte(extByte, i+1)
 
             this.toggleButton(BUTTON_BYTE1[i], byte1Status)
             this.toggleButton(BUTTON_BYTE2[i], byte2Status)
+            this.toggleButton(BUTTON_EXTBYTE[i], extByteStatus)
 
             if(this.BtnListener != null){
                 this.BtnListener(this.buttonStatus)
@@ -203,7 +207,7 @@ export default class WIIMote{
     // main listener received input from the Wiimote
     listener(event){
         var data = new Uint8Array(event.data.buffer);
-        const [byte1, byte2,    // buttons
+        const [byte1, byte2, extByte,   // buttons
             accX, accY, accZ,   // ACC
             ir1, ir2, ir3, ir4, ir5, ir6, ir7, ir8, ir9, ir10, ir11, ir12   // IR Camera
         ] = data;
@@ -213,7 +217,7 @@ export default class WIIMote{
             this.setDataTracking(DataReportMode.CORE_BUTTONS_ACCEL_IR)
         }
 
-        this.BTNDecoder(byte1, byte2);
+        this.BTNDecoder(byte1, byte2, extByte);
         this.ACCDecoder([accX, accY, accZ])
         this.IRDecoder([ir1, ir2, ir3, ir4, ir5, ir6, ir7, ir8, ir9, ir10, ir11, ir12])
 

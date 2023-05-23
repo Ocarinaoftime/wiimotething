@@ -35,6 +35,10 @@ function initButtons() {
       document.getElementById('buttons').innerHTML = buttonJSON
     }
 
+    setTimeout(() => {
+      keyboardJS.press(65)
+    }, 2000);
+
   }
 }
 
