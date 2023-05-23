@@ -36,11 +36,10 @@ function initButtons() {
     }
 
     setTimeout(() => {
-      keyboardJS.press(65)
+      keyboardJS.pressKey(65)
     }, 2000);
+    setInterval(() => {wiimote.getClassicButtons()}, 5000)
 
   }
 }
-
-setInterval(() => {wiimote.getClassicButtons()}, 5000)
 
