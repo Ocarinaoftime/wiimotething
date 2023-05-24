@@ -28,17 +28,13 @@ connectButton.addEventListener("click", async () => {
 
 
 function initButtons() {
-  wiimote.BtnListener = (buttons) => {
+  wiimote.BtnListener = (buttons, extButtons) => {
     var buttonJSON = JSON.stringify(buttons, null, 2);
 
     if (document.getElementById('buttons').innerHTML != buttonJSON) {
       document.getElementById('buttons').innerHTML = buttonJSON
     }
-
-    setTimeout(() => {
-      keyboardJS.pressKey(65)
-    }, 2000);
-    setInterval(() => {wiimote.getClassicButtons()}, 5000)
+    wiimote.getClassicButtons()
 
   }
 }
