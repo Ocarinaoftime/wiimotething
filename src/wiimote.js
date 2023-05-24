@@ -245,5 +245,6 @@ export default class WIIMote{
 
     //Return Classic Controller buttons
     getClassicButtons() {
-        return BUTTON_EXTBYTE    }
+        console.log(BUTTON_EXTBYTE)  
+    }
 }

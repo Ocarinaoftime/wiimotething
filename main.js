@@ -30,9 +30,13 @@ connectButton.addEventListener("click", async () => {
 function initButtons() {
   wiimote.BtnListener = (buttons, extButtons) => {
     var buttonJSON = JSON.stringify(buttons, null, 2);
+    var extButtonJSON = JSON.stringify(extButtons, null, 2);
 
     if (document.getElementById('buttons').innerHTML != buttonJSON) {
       document.getElementById('buttons').innerHTML = buttonJSON
+    }
+    if (document.getElementById('extbuttons').innerHTML != extButtonJSON) {
+      document.getElementById('extbuttons').innerHTML = extButtonJSON
     }
     wiimote.getClassicButtons()
 
