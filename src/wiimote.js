@@ -35,6 +35,26 @@ export default class WIIMote{
             "MINUS": false,
             "HOME": false
         };
+        this.extButtonStatus = {
+            "DPAD_LEFT" : false,
+            "DPAD_RIGHT": false,
+            "DPAD_DOWN": false,
+            "DPAD_UP": false,
+            "PLUS": false,
+            "TWO": false,
+            "ONE": false,
+            "B": false,
+            "A": false,
+            "X": false,
+            "Y": false,
+            "MINUS": false,
+            "HOME": false,
+            "L": false,
+            "R": false,
+            "ZL": false,
+            "ZR": false
+
+        }
         this.ledStatus = [
             false,  //led 1
             false,  //led 2
@@ -192,14 +212,14 @@ export default class WIIMote{
         for (let i = 0; i < 8; i++) {
             let byte1Status = getBitInByte(byte1, i+1)
             let byte2Status = getBitInByte(byte2, i+1)
-            let extByteStatus = getBitInByte(extByte, i+1)
+            let byte3Status = getBitInByte(extByte, i+1)
 
             this.toggleButton(BUTTON_BYTE1[i], byte1Status)
             this.toggleButton(BUTTON_BYTE2[i], byte2Status)
-            this.toggleButton(BUTTON_EXTBYTE[i], extByteStatus)
+            this.toggleButton(BUTTON_EXTBYTE[i], byte3Status)
 
             if(this.BtnListener != null){
-                this.BtnListener(this.buttonStatus)
+                this.BtnListener(this.buttonStatus, this.extButtonStatus)
             }
         }
     }
