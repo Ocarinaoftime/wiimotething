@@ -105,7 +105,7 @@ export default class WIIMote{
         this.writeRegister(RegisterType.CONTROL, 0xb00030, [0x08])
 
         /// update data tracking mode
-        this.setDataTracking(DataReportMode.CORE_BUTTONS_ACCEL_IR)
+        this.setDataTracking(DataReportMode.EXT_BUTTONS)
     }
 
     // Send a data report
@@ -163,7 +163,7 @@ export default class WIIMote{
     }
 
     // Set the Data output type 
-    setDataTracking(dataMode = DataReportMode.CORE_BUTTONS_ACCEL_IR || DataReportMode.EXT_BUTTONS){
+    setDataTracking(dataMode = DataReportMode.CORE_BUTTONS_ACCEL_IR){
         return this.sendReport( ReportMode.DATA_REPORTING, [0x00, dataMode]);
     }
 
