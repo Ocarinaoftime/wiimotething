@@ -163,7 +163,7 @@ export default class WIIMote{
     }
 
     // Set the Data output type 
-    setDataTracking(dataMode = DataReportMode.CORE_BUTTONS_ACCEL_IR){
+    setDataTracking(dataMode = DataReportMode.CORE_BUTTONS_ACCEL_IR || DataReportMode.EXT_BUTTONS){
         return this.sendReport( ReportMode.DATA_REPORTING, [0x00, dataMode]);
     }
 
