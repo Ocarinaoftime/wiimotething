@@ -203,7 +203,7 @@ export default class WIIMote{
     toggleButton(name, value){
         if(name == "" || name == undefined) return
 
-        this.buttonStatus[name] = (value != 0)
+        this.extButtonStatus[name] = (value != 0)
     }
 
     // Decode the button data
