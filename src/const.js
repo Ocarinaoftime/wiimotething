@@ -16,6 +16,7 @@ export const DataReportMode = {
     CORE_BUTTONS: 0x30,
     CORE_BUTTONS_AND_ACCEL: 0x31,
     CORE_BUTTONS_ACCEL_IR: 0x33,
+    CORE_BUTTONS_EXT_BUTTONS: 0x34,
     EXT_BUTTONS: 0x37
 }
 

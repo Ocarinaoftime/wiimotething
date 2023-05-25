@@ -76,8 +76,7 @@ export default class WIIMote{
     initiateDevice(){
         this.device.open().then(() => {
             this.sendReport(ReportMode.STATUS_INFO_REQ, [0x00])
-            this.setDataTracking(DataReportMode.CORE_BUTTONS)
-            this.setDataTracking(DataReportMode.EXT_BUTTONS)
+            this.setDataTracking(DataReportMode.CORE_BUTTONS_EXT_BUTTONS)
 
             this.device.oninputreport = (e) => this.listener(e);
         })
@@ -105,7 +104,7 @@ export default class WIIMote{
         this.writeRegister(RegisterType.CONTROL, 0xb00030, [0x08])
 
         /// update data tracking mode
-        this.setDataTracking(DataReportMode.EXT_BUTTONS)
+        this.setDataTracking(DataReportMode.CORE_BUTTONS_ACCEL_IR)
     }
 
     // Send a data report
